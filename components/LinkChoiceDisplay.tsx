@@ -2,6 +2,7 @@ import React, { MouseEvent } from 'react';
 import Modal from "react-bootstrap/Modal";
 import Stack from "react-bootstrap/Stack";
 import NewsCard from "./NewsCard";
+import Logo from './Logo';
 import { type Article } from "../lib/models";
 
 
@@ -10,6 +11,9 @@ function LinkChoiceDisplay(props: any) {
     const articleOpp : Article | undefined = article.opposing_views?.[0];
     const handleClose = props.handleClose || (() => { });
     const visible = props.visible || false;
+    const handleHide = () => {
+        handleClose();
+    };
     const handleClickArticle = () => {
         window.location.href = article.url;
     }
@@ -18,14 +22,14 @@ function LinkChoiceDisplay(props: any) {
             window.location.href = articleOpp.url;
     }
     return (
-        <Modal show={visible}>
-            <Modal.Header>
-                <Modal.Title>Opposing Viewpoints<span onClick={handleClose} style={{float: "right"}}>[X]</span></Modal.Title>
+        <Modal show={visible} onHide={handleHide}>
+            <Modal.Header closeButton>
+                <Logo />
             </Modal.Header>
             <Modal.Body>
                 <Stack gap={3}>
                     <NewsCard {...article} handleClickArticle={handleClickArticle} />
-                    <h2>Opposing Viewpoint</h2>
+                    <h3>Opposing Viewpoint</h3>
                     {
                         articleOpp && <NewsCard {...articleOpp} handleClickArticle={handleClickOpposingArticle} />
                     }
