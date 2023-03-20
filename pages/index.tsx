@@ -40,7 +40,15 @@ const Home: NextPage = () => {
 
   const doSearch = (searchTerm: string) => {
     console.log("doSearch: " + searchTerm);
+    setSearchTerm(searchTerm);
   }
+
+  useEffect(() => {
+    const effect = async () => {
+      setArticleData(await getNews(searchTerm));
+    }
+    effect();
+  }, [searchTerm]);
 
   useEffect(() => {
     const effect = async () => {
