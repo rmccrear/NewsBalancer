@@ -8,17 +8,21 @@ import LinkChoiceDisplay from "./LinkChoiceDisplay";
 import { type Article } from "../lib/models"
 
 function Scores ({scores}: {scores: any}) {
+  const toolTip = `Positivity Score: ${(scores.pos * 100).toFixed(1)}%\nNegativity Score: ${(scores.neg * 100).toFixed(1)}%\nNeutrality Score: ${(scores.neu * 100).toFixed(1)}%`;
   return (
-    <>
-
+    <Stack direction="horizontal" title={toolTip} className={"d-flex flex-row-reverse"}>
+              {scores.pos > scores.neg ? <Badge bg="success">{(scores.pos * 100).toFixed(1)}%</Badge> : ""}
+              {scores.neg > scores.pos ? <Badge bg="danger">{(scores.neg *100).toFixed(1)}%</Badge> : ""}
+      {/**
+      <Badge bg="success">{scores.pos * 100}%</Badge>
+      <Badge bg="danger">{scores.neg * 100}%</Badge>
+      <Badge bg="secondary">{scores.neu * 100}%</Badge>
+      */}
 {/*
-      <Badge bg="secondary">Positivity Score: {scores.pos * 100}%</Badge>
-      <Badge bg="secondary">Negativity Score: {scores.neg * 100}%</Badge>
-      <Badge bg="secondary">Neutrality Score: {scores.neu * 100}%</Badge>
-*/}
                 {scores.pos > scores.neg ? <Badge bg="success">Positive {(scores.pos * 100).toFixed(1)}%</Badge> : ""}
                 {scores.neg > scores.pos ? <Badge bg="danger">Negative {(scores.neg *100).toFixed(1)}%</Badge> : ""}
-    </>
+*/}
+    </Stack>
   );
 }
 
@@ -46,13 +50,13 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
           </div>
           <Stack gap={2} direction="horizontal">
             <div>
-              <div>
+              <div style={style.cardText}>
                 {name}
               </div>
             </div>
             <Stack gap={1}>
               { image && image.thumbnail &&
-                <Image rounded src={image.thumbnail.contentUrl} style={{height: "6em", width: "6em"}} />
+                <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
               }
                 <Scores scores={scores} />
             </Stack>
@@ -60,6 +64,17 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
         </Card.Text>
       </Card.Body>
     </Card >);
+}
+
+const style = {
+  cardText: {
+    cursor: "pointer"
+  },
+  image: {
+    height: "6em",
+    width: "6em",
+    cursor: "pointer",
+  }
 }
 
 export default NewsCard;
