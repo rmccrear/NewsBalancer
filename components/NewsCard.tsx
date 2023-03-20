@@ -51,7 +51,9 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
               </div>
             </div>
             <Stack gap={1}>
+              { image && image.thumbnail &&
                 <Image rounded src={image.thumbnail.contentUrl} style={{height: "6em", width: "6em"}} />
+              }
                 <Scores scores={scores} />
             </Stack>
           </Stack>
