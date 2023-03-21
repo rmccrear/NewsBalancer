@@ -34,19 +34,30 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
     handleClickArticle();
   }
   return (
-    <Card className='border-0'> 
-      <Card.Body onClick={handleClick}>
+    <Card className='border-1'> 
+      <Card.Header>
+        <h3>Opposing View</h3>
+        <div>Try reading an opposing view...</div>
+      </Card.Header>
+      <Card.Body onClick={handleClick} className="bg-light">
           <div style={{float: "right", margin: "0 0 0 1em"}}>
           </div>
           <Stack gap={2} direction="horizontal">
-            <Card.Text style={style.cardText}>
+            <div>
+              <Card.Text style={style.cardText}>
                 {name}
-            </Card.Text>
+              </Card.Text>
+              <Stack direction="horizontal">
+                <div className="ms-auto">
+                  <a href="{url}">[more…]</a> 
+                </div>
+              </Stack>
+            </div>
             <Stack gap={1}>
               { image && image.thumbnail &&
                 <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
               }
-                {/* <Scores scores={scores} /> */}
+                <Scores scores={scores} />
             </Stack>
           </Stack>
       </Card.Body>

@@ -1,7 +1,8 @@
 import React, { MouseEvent } from 'react';
 import Modal from "react-bootstrap/Modal";
 import Stack from "react-bootstrap/Stack";
-import NewsCard from "./NewsCard";
+import NewsCardArticleView from "./NewsCardArticleView";
+import NewsCardOpposingView from "./NewsCardOpposingView";
 import Logo from './Logo';
 import { type Article } from "../lib/models";
 
@@ -25,10 +26,9 @@ function LinkChoiceDisplay({article, handleClose, visible} : {article: Article, 
             </Modal.Header>
             <Modal.Body>
                 <Stack gap={3}>
-                    <NewsCard {...article} handleClickArticle={handleClickArticle} />
-                    <h3>Opposing Viewpoint</h3>
+                    <NewsCardArticleView {...article} handleClickArticle={handleClickArticle} />
                     {
-                        articleOpp && <NewsCard {...articleOpp} handleClickArticle={handleClickOpposingArticle} />
+                        articleOpp && <NewsCardOpposingView {...articleOpp} handleClickArticle={handleClickOpposingArticle} />
                     }
                 </Stack>
             </Modal.Body>
