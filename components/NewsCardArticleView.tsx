@@ -29,13 +29,14 @@ function Scores ({scores}: {scores: any}) {
 
 function NewsCardArticleView({ name, description, url, sentiment_score, image, handleClickArticle }: { name: string, description: string, url: string, sentiment_score: any, image: any, handleClickArticle: Function }) {
   const scores = sentiment_score;
-  const handleClick = (e: MouseEvent) => {
-    e.preventDefault();
-    handleClickArticle();
-  }
+  // const handleClick = (e: MouseEvent) => {
+  //   e.preventDefault();
+  //   handleClickArticle();
+  // }
+  const toolTip = `Positivity Score: ${(scores.pos * 100).toFixed(1)}%\nNegativity Score: ${(scores.neg * 100).toFixed(1)}%\nNeutrality Score: ${(scores.neu * 100).toFixed(1)}%`;
   return (
-    <Card className='border-0'> 
-      <Card.Body onClick={handleClick}>
+    <Card className='border-0' title={toolTip}> 
+      <Card.Body>
         <Stack>
           <Stack gap={2} direction="horizontal">
             <div>
@@ -43,17 +44,22 @@ function NewsCardArticleView({ name, description, url, sentiment_score, image, h
             </div>
             <Stack gap={1}>
               { image && image.thumbnail &&
-                <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
+
+                <a href={url} target="timio_news">
+                  <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
+                </a>
               }
                 <Scores scores={scores} />
             </Stack>
           </Stack>
-              <Card.Text style={style.cardText}>
-                {description}…
+              <Card.Text style={style.cardText} className="article-text">
+                <a href={url} target="timio_news">
+                  {description}…
+                </a>
               </Card.Text>
               <Stack direction="horizontal">
                 <div className="ms-auto">
-                  <a href="{url}">[more…]</a> 
+                  <a href={url} target="timio_news">[more…]</a> 
                 </div>
               </Stack>
         </Stack>
@@ -63,12 +69,12 @@ function NewsCardArticleView({ name, description, url, sentiment_score, image, h
 
 const style = {
   cardText: {
-    cursor: "pointer"
+  //   cursor: "pointer"
   },
   image: {
     height: "6em",
     width: "6em",
-    cursor: "pointer",
+    // cursor: "pointer",
   }
 }
 

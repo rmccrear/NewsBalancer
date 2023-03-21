@@ -27,25 +27,28 @@ function Scores ({scores}: {scores: any}) {
 }
 
 
-function NewsCard({ name, description, url, sentiment_score, image, handleClickArticle }: { name: string, description: string, url: string, sentiment_score: any, image: any, handleClickArticle: Function }) {
+function NewsCardOpposingView({ name, description, url, sentiment_score, image, handleClickArticle }: { name: string, description: string, url: string, sentiment_score: any, image: any, handleClickArticle: Function }) {
   const scores = sentiment_score;
-  const handleClick = (e: MouseEvent) => {
-    e.preventDefault();
-    handleClickArticle();
-  }
+  const toolTip = `Positivity Score: ${(scores.pos * 100).toFixed(1)}%\nNegativity Score: ${(scores.neg * 100).toFixed(1)}%\nNeutrality Score: ${(scores.neu * 100).toFixed(1)}%`;
+  // const handleClick = (e: MouseEvent) => {
+  //   e.preventDefault();
+  //   handleClickArticle();
+  // }
   return (
-    <Card className='border-1'> 
+    <Card className='border-1' title={toolTip}> 
       <Card.Header>
         <h3>Opposing View</h3>
         <div>Try reading an opposing view...</div>
       </Card.Header>
-      <Card.Body onClick={handleClick} className="bg-light">
+      <Card.Body className="bg-light">
           <div style={{float: "right", margin: "0 0 0 1em"}}>
           </div>
           <Stack gap={2} direction="horizontal">
             <div>
-              <Card.Text style={style.cardText}>
-                {name}
+              <Card.Text style={style.cardText} className="article-text">
+                <a href={url} target="timio_news">
+                  {name}
+                </a> 
               </Card.Text>
               <Stack direction="horizontal">
                 <div className="ms-auto">
@@ -55,7 +58,9 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
             </div>
             <Stack gap={1}>
               { image && image.thumbnail &&
-                <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
+                <a href="{url}">
+                  <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
+                </a> 
               }
                 <Scores scores={scores} />
             </Stack>
@@ -66,13 +71,13 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
 
 const style = {
   cardText: {
-    cursor: "pointer"
+  //  cursor: "pointer"
   },
   image: {
     height: "6em",
     width: "6em",
-    cursor: "pointer",
+  //  cursor: "pointer",
   }
 }
 
-export default NewsCard;
+export default NewsCardOpposingView;

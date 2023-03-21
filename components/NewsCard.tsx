@@ -29,12 +29,13 @@ function Scores ({scores}: {scores: any}) {
 
 function NewsCard({ name, description, url, sentiment_score, image, handleClickArticle }: { name: string, description: string, url: string, sentiment_score: any, image: any, handleClickArticle: Function }) {
   const scores = sentiment_score;
+  const toolTip = `Positivity Score: ${(scores.pos * 100).toFixed(1)}%\nNegativity Score: ${(scores.neg * 100).toFixed(1)}%\nNeutrality Score: ${(scores.neu * 100).toFixed(1)}%`;
   const handleClick = (e: MouseEvent) => {
     e.preventDefault();
     handleClickArticle();
   }
   return (
-    <Card className='border-0'> 
+    <Card className='border-0' title={toolTip}> 
       <Card.Body onClick={handleClick}>
           <div style={{float: "right", margin: "0 0 0 1em"}}>
           </div>
