@@ -6,11 +6,8 @@ import Logo from './Logo';
 import { type Article } from "../lib/models";
 
 
-function LinkChoiceDisplay(props: any) {
-    const { article } : {article: Article}= props;
+function LinkChoiceDisplay({article, handleClose, visible} : {article: Article, handleClose: Function, visible: boolean}) {
     const articleOpp : Article | undefined = article.opposing_views?.[0];
-    const handleClose = props.handleClose || (() => { });
-    const visible = props.visible || false;
     const handleHide = () => {
         handleClose();
     };
