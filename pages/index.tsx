@@ -14,7 +14,6 @@ import HeroContainer from '../components/Splash';
 import NewsCard from '../components/NewsCard'
 import LinkChoiceDisplay from '../components/LinkChoiceDisplay'
 import SearchBar from '../components/SearchBar';
-// import styles from '../styles/Home.module.css'
 import { getNews } from '../lib/getNews'
 import { type Article } from '../lib/models'
 import { SP } from 'next/dist/shared/lib/utils';
