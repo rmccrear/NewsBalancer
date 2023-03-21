@@ -37,8 +37,6 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
   return (
     <Card className='border-0' title={toolTip}> 
       <Card.Body onClick={handleClick}>
-          <div style={{float: "right", margin: "0 0 0 1em"}}>
-          </div>
           <Stack gap={2} direction="horizontal">
             <Card.Text style={style.cardText}>
                 {name}
