@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState, MouseEvent, FormEvent } from 'react';
 import Form from 'react-bootstrap/Form';
 import Card from "react-bootstrap/Card"
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -11,9 +11,13 @@ const style = {
 
 function SearchBar({doSearch}: {doSearch: Function}) {
     const [ searchTerm, setSearchTerm ] = useState<string>("");
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        doSearch(searchTerm);
+    } 
     return (
         <Card className="border-0">
-          <Form style={style.form}>
+          <Form style={style.form} onSubmit={handleSubmit}>
           <InputGroup>
               <Form.Control
               type="text"
