@@ -5,6 +5,10 @@ import type { NextPage } from 'next'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Stack from 'react-bootstrap/Stack';
+import Alert from 'react-bootstrap/Alert';
+import Spinner from 'react-bootstrap/Spinner';
 
 import HeroContainer from '../components/Splash';
 import NewsCard from '../components/NewsCard'
@@ -13,6 +17,7 @@ import SearchBar from '../components/SearchBar';
 // import styles from '../styles/Home.module.css'
 import { getNews } from '../lib/getNews'
 import { type Article } from '../lib/models'
+import { SP } from 'next/dist/shared/lib/utils';
 
 const NewsRow = ({articles, handleClickArticle}: {articles: Article[], handleClickArticle: Function}) => {
   return (
@@ -30,36 +35,73 @@ const NewsRow = ({articles, handleClickArticle}: {articles: Article[], handleCli
   );
 }
 
+const ErrorAlert = ({errorMessage} : {errorMessage: string}) => {
+  return (
+    <>
+        {
+          errorMessage !== "" ? (<Row>
+            <Alert variant="danger" style={{margin: "1em"}}>{errorMessage}</Alert>
+            </Row>) : ""
+        }
+    </>
+  )
+}
 
+const LoadingArticles = () => {
+  return (
+    <Stack direction="horizontal" className="d-flex">
+      <Spinner style={{margin: "1em auto"}}/>
+    </Stack>
+  )
+}
 
 const Home: NextPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("")
   const [articleData, setArticleData] = useState<Article[]>([]);
   const [targetArticle, setTargetArticle] = useState<Article>();
   const [linkChoiceVisible, setLinkChoiceVisible] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const doSearch = (searchTerm: string) => {
     console.log("doSearch: " + searchTerm);
     setSearchTerm(searchTerm);
   }
 
+  const fetchArticleData = async (searchTerm: string) => {
+      let articleData = [];
+      try{
+        articleData = await getNews(searchTerm);
+        setIsLoading(false);
+        setErrorMessage("");
+      } catch (e: any) {
+        console.log(e);
+        setIsLoading(false);
+        setErrorMessage("Sorry, we are unable to connect at the moment. Please try later.");
+      }
+      return articleData;
+  }
+
   useEffect(() => {
     const effect = async () => {
-      setArticleData(await getNews(searchTerm));
+      // setArticleData(await getNews(searchTerm));
+      setArticleData(await fetchArticleData(searchTerm));
     }
     effect();
   }, [searchTerm]);
 
   useEffect(() => {
     const effect = async () => {
-      setArticleData(await getNews(searchTerm));
+      setArticleData(await fetchArticleData(searchTerm));
     }
     effect();
   }, []);
+
   const handleClickArticle = (article: Article) => {
     setTargetArticle(article);
     setLinkChoiceVisible(true);
   }
+
   const closeLinkChoice = () => {
     setLinkChoiceVisible(false);
   }
@@ -86,30 +128,22 @@ const Home: NextPage = () => {
     }
   }
 
-
   return (
     <Container>
         <Row>
           <HeroContainer />
         </Row>
-        <Row>
+        <Row style={style.searchBarRow}>
           <SearchBar doSearch={doSearch}/>
         </Row>
+        <ErrorAlert errorMessage={errorMessage}/>
+        { isLoading && <LoadingArticles /> }
         {
           pairs.map((pair, idx) => {
             return (
               <NewsRow key={idx} articles={pair} handleClickArticle={handleClickArticle}/>
             );
           })
-          /*
-          articleData.map((article, idx) => {
-            return( 
-            <Card>
-                <NewsCard key={article.url} {...article} handleClickArticle={()=>handleClickArticle(article)}/>
-            </Card>
-            );
-          })
-          */
         }
         {
           targetArticle &&
@@ -117,6 +151,12 @@ const Home: NextPage = () => {
         }
     </Container>
   )
+}
+
+const style = {
+  searchBarRow: {
+    margin: "1.5em 0"
+  }
 }
 
 export default Home
