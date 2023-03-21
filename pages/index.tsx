@@ -21,12 +21,13 @@ import { SP } from 'next/dist/shared/lib/utils';
 
 const NewsRow = ({articles, handleClickArticle}: {articles: Article[], handleClickArticle: Function}) => {
   return (
-      <Row>
+      <Row className="bg-light">
         {
           articles.map((article, idx) => {
             return (
               <Col key={article.url} sm={6} className="d-flex align-items-stretch">
                 <NewsCard key={article.url} {...article} handleClickArticle={ ()=>handleClickArticle(article) }/>
+                <hr/>
               </Col>
             );
           })
@@ -129,6 +130,8 @@ const Home: NextPage = () => {
   }
 
   return (
+    <>
+    <div>
     <Container>
         <Row>
           <HeroContainer />
@@ -136,20 +139,28 @@ const Home: NextPage = () => {
         <Row style={style.searchBarRow}>
           <SearchBar doSearch={doSearch}/>
         </Row>
+    </Container>
+    </div>
+    <div className="bg-light pt-2">
+    <Container>
         <ErrorAlert errorMessage={errorMessage}/>
         { isLoading && <LoadingArticles /> }
+        <div>
         {
           pairs.map((pair, idx) => {
             return (
-              <NewsRow key={idx} articles={pair} handleClickArticle={handleClickArticle}/>
+              <NewsRow key={idx} articles={pair} handleClickArticle={handleClickArticle} />
             );
           })
         }
+        </div>
         {
           targetArticle &&
           <LinkChoiceDisplay article={targetArticle} visible={linkChoiceVisible} handleClose={closeLinkChoice}/>
         }
     </Container>
+    </div>
+    </>
   )
 }
 

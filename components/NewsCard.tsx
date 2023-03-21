@@ -35,7 +35,7 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
     handleClickArticle();
   }
   return (
-    <Card className='border-0' title={toolTip}> 
+    <Card className='border-1 m-1' title={toolTip}> 
       <Card.Body onClick={handleClick}>
           <Stack gap={2} direction="horizontal">
             <Card.Text style={style.cardText}>
