@@ -36,20 +36,10 @@ function NewsCardArticleView({ name, description, url, sentiment_score, image, h
   return (
     <Card className='border-0'> 
       <Card.Body onClick={handleClick}>
-        <Card.Text>
-          <div style={{float: "right", margin: "0 0 0 1em"}}>
-          </div>
+        <Stack>
           <Stack gap={2} direction="horizontal">
             <div>
               <h4>{name}</h4>
-              <div style={style.cardText}>
-                {description}…
-              </div>
-              <Stack direction="horizontal">
-                <div className="ms-auto">
-                  <a href="{url}">[more…]</a> 
-                </div>
-              </Stack>
             </div>
             <Stack gap={1}>
               { image && image.thumbnail &&
@@ -58,7 +48,15 @@ function NewsCardArticleView({ name, description, url, sentiment_score, image, h
                 <Scores scores={scores} />
             </Stack>
           </Stack>
-        </Card.Text>
+              <Card.Text style={style.cardText}>
+                {description}…
+              </Card.Text>
+              <Stack direction="horizontal">
+                <div className="ms-auto">
+                  <a href="{url}">[more…]</a> 
+                </div>
+              </Stack>
+        </Stack>
       </Card.Body>
     </Card >);
 }
