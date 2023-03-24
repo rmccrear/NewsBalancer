@@ -27,7 +27,7 @@ function LinkChoiceDisplay({article, handleClose, visible} : {article: Article, 
             <Modal.Body>
                 <Stack gap={3}>
                     <NewsCardArticleView {...article} handleClickArticle={handleClickArticle} />
-                    <NewsCardOpposingViewGetter name={article.name} description={article.description} sentiment={article.sentiment_score["pos"] > article.sentiment_score["neg"] ? "positive" : "negative"}/>
+                    <NewsCardOpposingViewGetter url={article.url} name={article.name} description={article.description} sentiment={article.sentiment_score["pos"] > article.sentiment_score["neg"] ? "positive" : "negative"}/>
                 </Stack>
             </Modal.Body>
         </Modal>

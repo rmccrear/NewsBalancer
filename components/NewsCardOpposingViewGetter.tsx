@@ -28,12 +28,12 @@ function Scores ({scores}: {scores: any}) {
 }
 
 
-function NewsCardOpposingViewGetter({ name, description, sentiment }: { name: string, description: string,  sentiment: string}) {
+function NewsCardOpposingViewGetter({ name, description, sentiment, url }: { name: string, description: string,  sentiment: string, url: string}) {
   const [oppArticle, setOppArticle] = useState<Article | null>(null);
 
   useEffect(() => {
     const effect = async () => {
-      const oppArticles = await getOpp(name, description, sentiment);
+      const oppArticles = await getOpp(name, description, sentiment, url);
       if(oppArticles && oppArticles.length > 0){
         setOppArticle(oppArticles[0]);
       }
@@ -64,12 +64,12 @@ function NewsCardOpposingViewGetter({ name, description, sentiment }: { name: st
                   {oppArticle.name}
                 </a> 
                 {oppArticle.name.length < 200 ? 
-                  <div>
+                  <>
                     <hr/>
                     <a href={oppArticle.url} target="timio_news">
                       {oppArticle.description}
                     </a> 
-                  </div> : ""
+                  </> : ""
                 } 
               </Card.Text>
               <Stack direction="horizontal">
