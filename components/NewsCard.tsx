@@ -1,11 +1,12 @@
 import React, { MouseEvent } from 'react';
-import Card from "react-bootstrap/Card"
+import Card from "react-bootstrap/Card";
 import Badge from 'react-bootstrap/Badge';
 import Image from 'react-bootstrap/Image'
 import Stack from 'react-bootstrap/Stack';
 import NewsThumbnailImage from "./NewsThumbnailImage"
 import LinkChoiceDisplay from "./LinkChoiceDisplay";
-import { type Article } from "../lib/models"
+import { type Article } from "../lib/models";
+import style from "./globalStyles";
 
 function Scores ({scores}: {scores: any}) {
   const toolTip = `Positivity Score: ${(scores.pos * 100).toFixed(1)}%\nNegativity Score: ${(scores.neg * 100).toFixed(1)}%\nNeutrality Score: ${(scores.neu * 100).toFixed(1)}%`;
@@ -38,9 +39,9 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
     <Card className='border-1 m-1' title={toolTip}> 
       <Card.Body onClick={handleClick}>
           <Stack direction="horizontal" gap={2} className="d-flex justify-content-between">
-              <Card.Text style={style.cardText}>
+              <Card.Title style={style.cardText}>
                 {name}
-              </Card.Text>
+              </Card.Title>
               { image && image.thumbnail &&
                 <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
               }
@@ -50,15 +51,5 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
     </Card >);
 }
 
-const style = {
-  cardText: {
-    cursor: "pointer"
-  },
-  image: {
-    height: "6em",
-    width: "6em",
-    cursor: "pointer",
-  }
-}
 
 export default NewsCard;

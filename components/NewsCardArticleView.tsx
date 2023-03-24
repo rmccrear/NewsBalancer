@@ -6,6 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 import NewsThumbnailImage from "./NewsThumbnailImage"
 import LinkChoiceDisplay from "./LinkChoiceDisplay";
 import { type Article } from "../lib/models"
+import style from "./globalStyles"
 
 function Scores ({scores}: {scores: any}) {
   const toolTip = `Positivity Score: ${(scores.pos * 100).toFixed(1)}%\nNegativity Score: ${(scores.neg * 100).toFixed(1)}%\nNeutrality Score: ${(scores.neu * 100).toFixed(1)}%`;
@@ -65,17 +66,6 @@ function NewsCardArticleView({ name, description, url, sentiment_score, image, h
         </Stack>
       </Card.Body>
     </Card >);
-}
-
-const style = {
-  cardText: {
-  //   cursor: "pointer"
-  },
-  image: {
-    height: "6em",
-    width: "6em",
-    // cursor: "pointer",
-  }
 }
 
 export default NewsCardArticleView;

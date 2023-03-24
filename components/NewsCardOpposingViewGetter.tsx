@@ -7,6 +7,7 @@ import NewsThumbnailImage from "./NewsThumbnailImage"
 import LinkChoiceDisplay from "./LinkChoiceDisplay";
 import { type Article } from "../lib/models"
 import { getOpp } from '../lib/getOpp';
+import style from "./globalStyles";
 
 function Scores ({scores}: {scores: any}) {
   const toolTip = `Positivity Score: ${(scores.pos * 100).toFixed(1)}%\nNegativity Score: ${(scores.neg * 100).toFixed(1)}%\nNeutrality Score: ${(scores.neu * 100).toFixed(1)}%`;
@@ -48,8 +49,10 @@ function NewsCardOpposingViewGetter({ name, description, sentiment, url }: { nam
   //   e.preventDefault();
   //   handleClickArticle();
   // }
+
+  const toolTip = (oppArticle: Article) => oppArticle ? `Positivity Score: ${(oppArticle.sentiment_score.pos * 100).toFixed(1)}%\nNegativity Score: ${(oppArticle.sentiment_score.neg * 100).toFixed(1)}%\nNeutrality Score: ${(oppArticle.sentiment_score.neu * 100).toFixed(1)}%` : "";
   return oppArticle ? (
-    <Card className='border-1' title={" "}> 
+    <Card className='border-1' title={toolTip(oppArticle)}> 
       <Card.Header>
         <h3>Opposing View</h3>
         <div>Try reading an opposing view...</div>
@@ -58,20 +61,21 @@ function NewsCardOpposingViewGetter({ name, description, sentiment, url }: { nam
           <div style={{float: "right", margin: "0 0 0 1em"}}>
           </div>
           <Stack gap={2} direction="horizontal">
-            <div>
-              <Card.Text style={style.cardText} className="article-text">
+            <div className="article-text">
+              <Card.Title style={style.cardText}>
                 <a href={oppArticle.url} target="timio_news">
                   {oppArticle.name}
                 </a> 
+              </Card.Title>
                 {oppArticle.name.length < 200 ? 
                   <>
-                    <hr/>
+                  <Card.Text className="mt-3">
                     <a href={oppArticle.url} target="timio_news">
                       {oppArticle.description}
                     </a> 
+                  </Card.Text>
                   </> : ""
                 } 
-              </Card.Text>
               <Stack direction="horizontal">
                 <div className="ms-auto">
                   <a href={oppArticle.url}>[more…]</a> 
@@ -88,17 +92,6 @@ function NewsCardOpposingViewGetter({ name, description, sentiment, url }: { nam
           </Stack>
       </Card.Body>
     </Card >) : <span> Loading opposing view... </span>;
-}
-
-const style = {
-  cardText: {
-  //  cursor: "pointer"
-  },
-  image: {
-    height: "6em",
-    width: "6em",
-  //  cursor: "pointer",
-  }
 }
 
 export default NewsCardOpposingViewGetter;
