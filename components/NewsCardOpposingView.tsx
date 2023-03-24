@@ -52,13 +52,13 @@ function NewsCardOpposingView({ name, description, url, sentiment_score, image, 
               </Card.Text>
               <Stack direction="horizontal">
                 <div className="ms-auto">
-                  <a href="{url}">[more…]</a> 
+                  <a href={url}>[more…]</a> 
                 </div>
               </Stack>
             </div>
             <Stack gap={1}>
               { image && image.thumbnail &&
-                <a href="{url}">
+                <a href={url}>
                   <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
                 </a> 
               }
