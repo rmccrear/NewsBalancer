@@ -37,16 +37,14 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
   return (
     <Card className='border-1 m-1' title={toolTip}> 
       <Card.Body onClick={handleClick}>
-          <Stack gap={2} direction="horizontal">
-            <Card.Text style={style.cardText}>
+          <Stack direction="horizontal" gap={2} className="d-flex justify-content-between">
+              <Card.Text style={style.cardText}>
                 {name}
-            </Card.Text>
-            <Stack gap={1}>
+              </Card.Text>
               { image && image.thumbnail &&
                 <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
               }
                 {/* <Scores scores={scores} /> */}
-            </Stack>
           </Stack>
       </Card.Body>
     </Card >);
