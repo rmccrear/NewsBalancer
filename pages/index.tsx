@@ -24,7 +24,7 @@ const NewsRow = ({articles, handleClickArticle}: {articles: Article[], handleCli
         {
           articles.map((article, idx) => {
             return (
-              <Col key={article.url} sm={6}>
+              <Col key={article.url} sm={6} className="d-flex justify-content-stretch ">
                 <NewsCard key={article.url} {...article} handleClickArticle={ ()=>handleClickArticle(article) }/>
                 <hr/>
               </Col>
