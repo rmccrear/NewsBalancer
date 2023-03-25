@@ -39,7 +39,7 @@ function NewsCardArticleView({ name, description, url, sentiment_score, image, h
     <Card className='border-0' title={toolTip}> 
       <Card.Body>
         <Stack>
-          <Stack gap={2} direction="horizontal">
+          <Stack gap={2} direction="horizontal" className="align-items-end">
             <div>
               <h4>{name}</h4>
             </div>
@@ -50,10 +50,10 @@ function NewsCardArticleView({ name, description, url, sentiment_score, image, h
                   <Image rounded src={image.thumbnail.contentUrl} style={style.image} />
                 </a>
               }
-                <Scores scores={scores} />
+                {/* <Scores scores={scores} /> */}
             </Stack>
           </Stack>
-              <Card.Text style={style.cardText} className="article-text">
+              <Card.Text style={{ ...style.cardText, margin: "1em 0 0 0"}} className="article-text">
                 <a href={url} target="timio_news">
                   {description}…
                 </a>
