@@ -21,7 +21,7 @@ function HeroContainer() {
             <Logo />
         </div>
         <div style={style.blurb}>
-            Find opposing viewpoints in the news.
+            Truth. Trust. Transparency.
         </div>
     </Container>
   );

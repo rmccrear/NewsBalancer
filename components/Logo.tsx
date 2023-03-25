@@ -18,7 +18,7 @@ function Logo() {
     <div className="logo" style={style.logo}>
       <h1 style={style.h1}>
         <img src="/logo.png" alt="Logo" style={style.img}/>
-        Timio News
+        Timio
       </h1>
     </div>
   );
