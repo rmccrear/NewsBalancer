@@ -9,10 +9,11 @@ const NewsTabs: FunctionComponent<NewsTabsProps> = ({handleSelect}) => {
     const newsTypes : Record<string, string> = {
         "U.S.": "US news",
         "World": "world news",
+        "Politics": "political news",
         "Sports": "sports news",
         "Entertainment": "entertainment news",
         "Business": "business news",
-        "Tech": "technology news"
+        "Technology": "technology news"
     };
     return ( 
     <Nav onSelect={(searchTerm) => handleSelect(searchTerm)} className="justify-content-center">
