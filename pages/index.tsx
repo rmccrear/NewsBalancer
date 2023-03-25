@@ -5,18 +5,17 @@ import type { NextPage } from 'next'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 
 import HeroContainer from '../components/Splash';
-import NewsCard from '../components/NewsCard'
+import NewsTabs from '../components/NewsTabs';
+import NewsCard from '../components/NewsCard';
 import LinkChoiceDisplay from '../components/LinkChoiceDisplay'
 import SearchBar from '../components/SearchBar';
-import { getNews } from '../lib/getNews'
-import { type Article } from '../lib/models'
-import { SP } from 'next/dist/shared/lib/utils';
+import { getNews } from '../lib/getNews';
+import { type Article } from '../lib/models';
 
 const NewsRow = ({articles, handleClickArticle}: {articles: Article[], handleClickArticle: Function}) => {
   return (
@@ -84,7 +83,6 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const effect = async () => {
-      // setArticleData(await getNews(searchTerm));
       setArticleData(await fetchArticleData(searchTerm));
     }
     effect();
@@ -100,6 +98,10 @@ const Home: NextPage = () => {
   const handleClickArticle = (article: Article) => {
     setTargetArticle(article);
     setLinkChoiceVisible(true);
+  }
+
+  const handleSelect = (searchTerm: string) => {
+    doSearch(searchTerm);
   }
 
   const closeLinkChoice = () => {
@@ -136,7 +138,10 @@ const Home: NextPage = () => {
           <HeroContainer />
         </Row>
         <Row style={style.searchBarRow}>
-          <SearchBar doSearch={doSearch}/>
+          <SearchBar doSearch={doSearch} resetSearchTerm={searchTerm}/>
+        </Row>
+        <Row>
+          <NewsTabs handleSelect={handleSelect}/>
         </Row>
     </Container>
     </div>
