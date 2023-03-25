@@ -17,7 +17,7 @@ const NewsTabs: FunctionComponent<NewsTabsProps> = ({handleSelect}) => {
     return ( 
     <Nav onSelect={(searchTerm) => handleSelect(searchTerm)} className="justify-content-center">
         {Object.keys(newsTypes).map( (newsTopic) => ( 
-          <Nav.Item>
+          <Nav.Item key={newsTopic}>
               <Nav.Link eventKey={newsTypes[newsTopic]}>
                 {newsTopic}
               </Nav.Link>
