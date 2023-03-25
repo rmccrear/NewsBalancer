@@ -38,7 +38,7 @@ function NewsCard({ name, description, url, sentiment_score, image, handleClickA
   return (
     <Card className='border-1 m-1' title={toolTip} style={{width: "100%"}}> 
       <Card.Body onClick={handleClick}>
-          <Stack direction="horizontal" gap={2} className="d-flex justify-content-between">
+          <Stack direction="horizontal" gap={2} className="d-flex justify-content-between align-items-start">
               <Card.Title style={style.cardText}>
                 {name}
               </Card.Title>
