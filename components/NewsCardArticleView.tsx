@@ -3,9 +3,6 @@ import Card from "react-bootstrap/Card"
 import Badge from 'react-bootstrap/Badge';
 import Image from 'react-bootstrap/Image'
 import Stack from 'react-bootstrap/Stack';
-import NewsThumbnailImage from "./NewsThumbnailImage"
-import LinkChoiceDisplay from "./LinkChoiceDisplay";
-import { type Article } from "../lib/models"
 import style from "./globalStyles"
 
 function Scores ({scores}: {scores: any}) {

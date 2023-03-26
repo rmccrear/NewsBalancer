@@ -3,9 +3,6 @@ import Card from "react-bootstrap/Card";
 import Badge from 'react-bootstrap/Badge';
 import Image from 'react-bootstrap/Image'
 import Stack from 'react-bootstrap/Stack';
-import NewsThumbnailImage from "./NewsThumbnailImage"
-import LinkChoiceDisplay from "./LinkChoiceDisplay";
-import { type Article } from "../lib/models";
 import style from "./globalStyles";
 
 function Scores ({scores}: {scores: any}) {
@@ -28,7 +25,7 @@ function Scores ({scores}: {scores: any}) {
 }
 
 
-function NewsCard({ name, description, url, sentiment_score, image, handleClickArticle }: { name: string, description: string, url: string, sentiment_score: any, image: any, handleClickArticle: Function }) {
+function NewsCard({ name, sentiment_score, image, handleClickArticle }: { name: string, description: string, url: string, sentiment_score: any, image: any, handleClickArticle: Function }) {
   const scores = sentiment_score;
   const toolTip = `Positivity Score: ${(scores.pos * 100).toFixed(1)}%\nNegativity Score: ${(scores.neg * 100).toFixed(1)}%\nNeutrality Score: ${(scores.neu * 100).toFixed(1)}%`;
   const handleClick = (e: MouseEvent) => {
