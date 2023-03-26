@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {type Article} from './models';
 
-const apiUrl: string =  process.env.NEXT_PUBLIC_API_SERVER;
+const apiUrl: string =  process.env.NEXT_PUBLIC_API_SERVER || "http://localhost:4000";
 
 export const getOpp = async (name: string, description: string, sentiment: string, url: string) => {
     console.log("url: " + url);

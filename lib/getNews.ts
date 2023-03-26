@@ -1,4 +1,4 @@
-const apiUrl: string =  process.env.NEXT_PUBLIC_API_SERVER;
+const apiUrl: string =  process.env.NEXT_PUBLIC_API_SERVER || "http://localhost:4000";
 
 const getNews = async (searchString: string) => {
   // const resp = await fetch(apiUrl);
